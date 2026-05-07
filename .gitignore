@@ -1,5 +1,7 @@
 __pycache__/
 *.pyc
 .env
-cookies.txt
-venv/
+app.db
+alembic/versions/__pycache__/
+pytest_cache/
+.venv/
