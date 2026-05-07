@@ -1,22 +1,30 @@
-from pydantic import BaseModel, EmailStr
-from typing import Optional, List
+from pydantic import BaseModel, EmailStr, constr, conint
+from typing import Optional
 
 class UserCreate(BaseModel):
-    name: str
+    username: str
+    age: conint(gt=18)
     email: EmailStr
-    age: Optional[int] = None
-    is_subscribed: Optional[bool] = None
+    password: constr(min_length=8, max_length=16)
+    phone: Optional[str] = None
 
-class Product(BaseModel):
-    product_id: int
-    name: str
-    category: str
+class UserOut(BaseModel):
+    id: int
+    username: str
+    age: int
+    email: str
+    phone: Optional[str]
+
+class ErrorResponse(BaseModel):
+    status_code: int
+    message: str
+    details: Optional[str] = None
+
+class ProductCreate(BaseModel):
+    title: str
     price: float
+    count: int
 
-sample_products = [
-    Product(product_id=1, name="Чистый код", category="Программирование", price=850.0),
-    Product(product_id=2, name="Паттерны проектирования", category="Программирование", price=1200.0),
-    Product(product_id=3, name="Алгоритмы. Построение и анализ", category="Алгоритмы", price=2100.0),
-    Product(product_id=4, name="Прагматичный программист", category="Программирование", price=950.0),
-    Product(product_id=5, name="Введение в алгоритмы", category="Алгоритмы", price=1750.0),
-]
+class ProductOut(ProductCreate):
+    id: int
+    description: Optional[str] = None
