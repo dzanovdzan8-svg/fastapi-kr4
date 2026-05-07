@@ -1,3 +1,9 @@
 fastapi
 uvicorn
 pydantic[email]
+sqlalchemy
+alembic
+pytest
+pytest-asyncio
+httpx
+faker
